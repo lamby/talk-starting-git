@@ -7,4 +7,4 @@ pdf:
 	pdflatex $(TEXFILE)
 
 clean:
-	-rm *.aux *.toc *.out *.snm *.log *.nav
+	-rm *.aux *.toc *.out *.snm *.log *.nav *.vrb
