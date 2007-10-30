@@ -1,6 +1,8 @@
 TEXFILE=talk-starting-git.tex
 
-all: clean
+all: clean pdf
+
+pdf:
 	pdflatex $(TEXFILE)
 	pdflatex $(TEXFILE)
 
