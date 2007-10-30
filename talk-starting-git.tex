@@ -1,0 +1,249 @@
+%
+% "Git Tutorial"
+% Copyright (C) 2007  Chris Lamb <chris@chris-lamb.co.uk
+% Based on a template (C) Daniel Watkins <D.M.Watkins@warwick.ac.uk>
+%                         Chris Lamb <chris@chris-lamb.co.uk>
+%
+%  This program is free software; you can redistribute it and/or modify
+%  it under the terms of the GNU General Public License as published by
+%  the Free Software Foundation; either version 2 of the License, or
+%  (at your option) any later version.
+%
+%  This program is distributed in the hope that it will be useful,
+%  but WITHOUT ANY WARRANTY; without even the implied warranty of
+%  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+%  GNU General Public License for more details.
+%
+%  You should have received a copy of the GNU General Public License
+%  along with this program; if not, write to the Free Software
+%  Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+
+\documentclass{beamer}
+
+\usepackage{beamerthemesplit}
+\usepackage{url} 
+
+\title{First steps with Git}
+\author[Chris Lamb, WUGLUG]{Chris Lamb\\Warwick University GNU/Linux User Group\\\small{\url{http://www.wuglug.org.uk/}}} % Replace <AUTHOR> with your name
+\date{31st October 2007
+\newline
+\newline
+\tiny{The \LaTeX{} source code for this presentation is licensed under the GNU General Public License.}}
+
+\begin{document}
+
+\frame{\titlepage}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Preliminaries}
+
+\subsection{What is Git?}
+\frame
+{
+    \frametitle{What is Git?}
+
+    \begin{quote}
+        Git is a fast, scalable, distributed revision control system with an
+        unusually rich command set that provides both high-level operations and
+        full access to internals.
+    \end{quote}
+}
+
+\subsection{Installing Git}
+\begin{frame}[fragile]
+    \frametitle{Installing Git}
+
+    \begin{description}
+        \item[Debian] \verb/aptitude install git-core/
+        \item[OpenSUSE] \verb/zypper install git-core/
+        \item[Fedora] \verb/yum install git-core/
+        \item[Gentoo] \verb/emerge -va git-core/
+        \item[Codd] Already installed.
+        \item[DCS] Get source from \url{http://git.or.cz/}, then: \\ 
+            \verb# $ ./configure --prefix=$HOME# \\
+            \verb# $ make -j 30# \\
+            \verb# $ make install#
+        \item[MS-Windows] Don't care, YDIW.
+    \end{description}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Doing stuff with Git}
+
+\begin{frame}[fragile]
+    What not to do at this point:
+
+    \begin{verbatim}
+        $ git-<TAB>
+        Display all 137 possibilities? (y or n)
+    \end{verbatim}
+
+    DON'T PANIC.
+
+    \begin{quote}
+    Git is a fast, scalable, distributed revision control system with an
+    unusually \alert{rich command set that provides both high-level operations and
+    full access to internals}.
+    \end{quote}
+
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Creating a repository}
+
+    \begin{verbatim}
+$ git init
+Initialized empty Git repository in .git/
+    \end{verbatim}
+
+    \begin{verbatim}
+$ ls -la
+drwx------  3 lamby lamby 4096 2007-10-28 00:49 .
+drwxr-xr-x 74 lamby lamby 4096 2007-10-28 00:49 ..
+drwxr-xr-x  7 lamby lamby 4096 2007-10-28 00:49 .git
+    \end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Your first commit}
+
+    Committing is simple:
+
+    \begin{verbatim}
+$ vim hello.py
+$ git add hello.py
+$ git commit
+Created initial commit 0b7acf6: Intiial commit
+ 1 files changed, 3 insertions(+), 0 deletions(-)
+ create mode 100644 hello.py
+$
+    \end{verbatim}
+
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{What just happened?}
+
+    \begin{itemize}
+        \item Git has a \emph{staging area} for commits
+        \item \alert{git add} adds files to the staging area
+        \item \alert{git commit} commits the staging area
+        \item So faaast
+    \end{itemize}
+
+    To examine the difference between your , use \alert{git diff}.
+
+    \verb#git commit -a#
+
+\end{frame}
+
+
+\begin{frame}[fragile]
+    \frametitle{Viewing history}
+
+    \begin{itemize}
+        \item \alert{git log}
+    \end{itemize}
+\end{frame}
+
+
+
+\begin{frame}[fragile]
+    \frametitle{Branches}
+
+    \begin{itemize}
+        \item A single Git repository can maintain multiple branches
+        \item To create a new branch, run: \verb#git branch new-branch-name#
+        \item \verb#git branch# lists current branches:
+
+    \begin{verbatim}
+  ~/local/git/linux-linus2.6$ git branch
+    lamby-nek4k
+    liyu-nek4k
+  * master
+    nek4k\end{verbatim}
+        \item Switch branches with \verb#git checkout branch-name#
+    \end{itemize}
+
+\end{frame}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Sharing your work}
+
+\begin{frame}[fragile]
+    First, set your username.
+
+    \begin{verbatim}
+$ git config --global user.name "Chris Lamb"
+$ git config --global user.email chris@chris-lamb.co.uk
+    \end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]
+    No master servers - we another repository to 'push' to.
+
+    \begin{description}
+        \item[ssh] - Default
+        \item[git] - Custom protocol on \verb#9418/tcp#. Efficient. Firewall issues.
+        \item[http] - Slow, requires some extra configuration. Firewall friendly.
+        \item[rsync] - Fairly efficient.
+    \end{description}
+
+    \begin{verbatim}
+    \end{verbatim}
+\end{frame}
+
+
+
+\begin{frame}[fragile]
+    Sharing over HTTP.
+    
+    Create your bare Git repository in \verb#public_html#, or similar.
+    Or symlink your repositories \verb#.git# somewhere accessible
+
+    You will need to run \verb#git-update-server-info# if you want 
+    \end{verbatim}
+
+    Or make this automatic with:
+
+    \begin{verbatim}
+  $ chmod +x hooks/post-update
+    \end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]
+    \begin{verbatim}
+    \end{verbatim}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Cool stuff}
+
+% Speed (wrt. workflow, garbage collecting)
+% CVS server emulation,
+% Cheap branching, cheap merging (octopus merge)
+% gitk
+% Importing SVN repositories
+% Interacting with SVN repositories
+% Importing from \$TOOL
+% Putting the current branch in your PROMPT!
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\frame
+{
+    \frametitle{Thanks!}
+    WUGLUG contact information:
+    \begin{itemize}
+        \item Website: \url{http://www.wuglug.org.uk}
+        \item IRC: {\tt \#wuglug} on {\tt irc.uwcs.co.uk:6667}
+        \item Mailing list: \url{https://www.warwickcompsoc.co.uk/mailman/listinfo/wuglug}
+    \end{itemize}
+}
+
+\end{document}
