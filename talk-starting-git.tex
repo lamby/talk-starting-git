@@ -88,7 +88,7 @@
             \lstinline!\$ git-<TAB>! \\
             \lstinline!Display all 137 possibilities? (y or n)!
 
-            \vskip 1em
+            \vskip 1em \pause
 
             Don't panic! \pause
 
@@ -120,6 +120,8 @@
         \frame {
             \frametitle{What just happened?}
 
+            \pause
+
             \begin{itemize}
                 \item Git has a staging area for commits \pause
                 \item \lstinline!git add! adds files to the staging area
@@ -131,14 +133,21 @@
         \frame {
             \frametitle{Reverting commits}
 
+            \pause
+
             \begin{block}{Reverting a commit (rollback)}
-                \lstinline!\$ git revert HEAD !
+                \lstinline!\$ git revert HEAD ! \\
+                This a seperate (but reverse) commit operation.
             \end{block}
 
+            \pause
+
             \begin{block}{Reverting changes}
-                \lstinline!\$ git-reset --hard !
+                \lstinline!\$ git-reset --hard ! \\
                 Resets working tree to last committed state.
             \end{block}
+
+            \pause
 
             \begin{block}{Fixing a commit}
                 Run:
@@ -170,24 +179,24 @@
         \frametitle{Creating a remote repository}
 
         \begin{itemize}
-            \item We need a remote repo to store our commits \pause
+            \item We need a repository somewhere to store our commits \pause
             \item `Bare` repositories vs. normal repositories \pause
         \end{itemize}
 
         \begin{block}{Creating a bare repository}
             \lstinline!\$ mkdir myproject.git! \\
             \lstinline_\$ cd !\$_ \\
-            \lstinline!\$ git --bare init .!
+            \lstinline!\$ git --bare init!
         \end{block}
     }
 
-    \subsection{Configure local repository}
+    \subsection{Configuring the local repository}
     \frame {
-        \frametitle{Configure local repository}
+        \frametitle{Configuring the local repository}
 
         \begin{itemize}
             \item Each repo can 'track' other repositories, called \emph{remotes}
-            \item Remote specifications are stored in \lstinline!.git/config! \pause
+            \item `Remote' specifications are stored in \lstinline!.git/config! \pause
             \item Use \lstinline!git remote! to add a new remote:
         \end{itemize}
 
@@ -203,7 +212,7 @@
 
         \begin{itemize}
             \item Once you have made some commits, you can push changes! \pause
-            \item Use \lstinline!--all! the first time your push.
+            \item Use \lstinline!--all! the first time you push
         \end{itemize}
 
         \begin{block}{Pushing changes (first time)}
@@ -219,9 +228,11 @@
     \frame {
         \frametitle{Letting others clone your repository}
 
+        \pause
+
         \begin{itemize}
             \item You can create your bare Git repository in \lstinline!public_html! (or similar) \pause
-            \item \ldots or symlink a full repository's \lstinline!.git! into \lstinline!public_html! \pause
+            \item \ldots or symlink a non-bare repository's \lstinline!.git! into \lstinline!public_html! \pause
             \item \ldots or use the Git protocol (recommended) \pause
         \end{itemize}
 
@@ -242,8 +253,8 @@
         \begin{itemize}
             \item Ask contributor to give you:
                 \begin{enumerate}
-                    \item His repository's URL (eg. \url{http://brad.uwcs.co.uk/git/myproject.git)} \pause
-                    \item Which branch of his to pull (eg. \lstinline!brads-new-cool-stuff!) \pause
+                    \item His/her repository's URL (eg. \url{http://brad.uwcs.co.uk/git/myproject.git)} \pause
+                    \item Which branch of his/her to pull (eg. \lstinline!brads-new-cool-stuff!) \pause
                 \end{enumerate}
         \end{itemize}
 
@@ -309,6 +320,7 @@
                         \item Darcs
                         \item Arch, Quilt, IBM Rational ClearCase, \ldots
                     \end{itemize}
+                \pause
                 \item Roll your own imports easily with \lstinline!git-fast-import!.
                 \item More info: 
                     \small{\url{http://git.or.cz/gitwiki/InterfacesFrontendsAndTools}}
@@ -317,13 +329,13 @@
 
         \frame {
             \frametitle{Working transparently with SVN repositories}
-
+            \pause
             \begin{itemize}
                 \item Get:
                 \begin{itemize}
-                    \item The familiar, faster and saner Git tools
-                    \item Off-line commits (whilst still being distributed)
-                    \item The warm glow of elitism
+                    \item The familiar, faster and saner Git tools  \pause
+                    \item Off-line commits (whilst still being distributed) \pause
+                    \item A warm glow of elitism
                 \end{itemize}
                 \item More info: \lstinline!man git-svn!
             \end{itemize}
@@ -331,18 +343,18 @@
 
     \subsection{Other stuff}
         \frame {
-            \frametitle{Git-bisect}
+            \frametitle{`Git-bisect'}
             
             \begin{itemize}
-                \item Useful for finding when a bug was introduced (which usually indicates how to fix the bug!)
-                \item Binary searches revisions for fault
+                \item For quickly finding when a bug was introduced \pause
+                \item Binary searches history for fault \pause
                 \item Works by either:
                     \begin{itemize}
-                        \item Manually specifying bad revisions (\lstinline!git bisect good/bad!)
-                        \item Specifying a command that should be run on each revision
+                        \item Manually specifying bad revisions (\lstinline!git bisect good|bad!) \pause
+                        \item Specifying a command that should be run on each revision \pause
                     \end{itemize}
-                \item Can be restricted to specified paths
-                \item Most effective with good patch dicipline
+                \item Can be restricted to specified paths \pause
+                \item Effective only with good patch discipline
             \end{itemize}
         }
 
