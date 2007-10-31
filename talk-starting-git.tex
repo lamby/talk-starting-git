@@ -263,23 +263,42 @@
 
 \section{Cool stuff}
 
-% Speed (wrt. workflow, garbage collecting)
-% gitweb
+        \frame {
+            \frametitle{Cool stuff}
+        }
 
+        \frame {
+            \frametitle{Speed}
+            \begin{itemize}
+                \item Git is optimised for Linus:
+                \pause
+                \begin{itemize}
+                    \item Fast merging
+                    \item Fast branching \pause
+                    \item Fast downloading \pause
+                    \item Laziness \pause
+                \end{itemize}
+                \item Garbage-collection: \lstinline!git gc!
+            \end{itemize}
+        }
     \subsection{Graphical tools}
         \frame {
             \frametitle{Gitk - `the Git repository browser'}
-            \includegraphics[width=75mm]{gitk.png}
+            \center{ \includegraphics[width=70mm]{gitk.png} }
         }
         \frame {
             \frametitle{git-gui - `a portable graphical interface to Git'}
-            \includegraphics[width=75mm]{git-gui.png}
+            \center{ \includegraphics[width=70mm]{git-gui.png} }
+        }
+        \frame {
+            \frametitle{Gitweb - `web interface to Git'}
+            \center{ \includegraphics[width=65mm]{gitweb.png} }
         }
 
     \subsection{Interacting with legacy tools}
         \frame {
             \frametitle{Importing from \$TOOL}
-
+            \pause
             \begin{itemize}
                 \item Import complete history from:
                     \begin{itemize}
