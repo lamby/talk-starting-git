@@ -128,8 +128,24 @@
             \end{itemize}
         }
 
-    % TODO: Revert
-    % TODO: diff
+        \frame {
+            \frametitle{Reverting commits}
+
+            \begin{block}{Reverting a commit (rollback)}
+                \lstinline!\$ git revert HEAD !
+            \end{block}
+
+            \begin{block}{Reverting changes}
+                \lstinline!\$ git-reset --hard !
+                Resets working tree to last committed state.
+            \end{block}
+
+            \begin{block}{Fixing a commit}
+                Run:
+                \lstinline!\$ git commit -a --amend!
+                after fixing broken files.
+            \end{block}
+        }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -260,7 +276,7 @@
             \includegraphics[width=75mm]{git-gui.png}
         }
 
-    \subsection{Legacy tools}
+    \subsection{Interacting with legacy tools}
         \frame {
             \frametitle{Importing from \$TOOL}
 
@@ -295,6 +311,22 @@
         }
 
     \subsection{Other stuff}
+        \frame {
+            \frametitle{Git-bisect}
+            
+            \begin{itemize}
+                \item Useful for finding when a bug was introduced (which usually indicates how to fix the bug!)
+                \item Binary searches revisions for fault
+                \item Works by either:
+                    \begin{itemize}
+                        \item Manually specifying bad revisions (\lstinline!git bisect good/bad!)
+                        \item Specifying a command that should be run on each revision
+                    \end{itemize}
+                \item Can be restricted to specified paths
+                \item Most effective with good patch dicipline
+            \end{itemize}
+        }
+
         \frame {
             \frametitle{Current branch in shell prompt}
             
