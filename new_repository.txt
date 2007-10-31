@@ -1,0 +1,7 @@
+$ git init
+Initialized empty Git repository in .git/
+
+$ ls -la
+drwx------  3 lamby lamby 4096 2007-10-28 00:49 .
+drwxr-xr-x 74 lamby lamby 4096 2007-10-28 00:49 ..
+drwxr-xr-x  7 lamby lamby 4096 2007-10-28 00:49 .git

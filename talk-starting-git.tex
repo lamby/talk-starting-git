@@ -21,12 +21,21 @@
 \documentclass{beamer}
 
 \usepackage{beamerthemesplit}
-\usepackage{url} 
 \usetheme{Warsaw}
 
+\usepackage{graphicx}
+\usepackage{url} 
+
+\usepackage{listings} 
+\lstset{basicstyle=\ttfamily\scriptsize}
+
+
 \title{First steps with Git}
-\author[Chris Lamb, WUGLUG]{Chris Lamb\\Warwick University GNU/Linux User Group\\\small{\url{http://www.wuglug.org.uk/}}} % Replace <AUTHOR> with your name
+\author[Chris Lamb, WUGLUG]{Chris Lamb\\Warwick University GNU/Linux User Group}
 \date{31st October 2007
+\newline
+\newline
+\includegraphics[width=10mm]{git-logo.png}
 \newline
 \newline
 \tiny{The \LaTeX{} source code for this presentation is licensed under the GNU General Public License.}}
@@ -36,205 +45,269 @@
 \frame{\titlepage}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Preliminaries}
+\section{Getting started}
 
-\subsection{What is Git?}
-\frame
-{
-    \frametitle{What is Git?}
+    \subsection{What is Git?}
+        \frame {
+            \frametitle{What is Git?}
 
-    \begin{quote}
-        Git is a fast, scalable, distributed revision control system with an
-        unusually rich command set that provides both high-level operations and
-        full access to internals.
-    \end{quote}
-}
+            \begin{quote}
+                Git is a fast, scalable, distributed revision control system with an
+                unusually rich command set that provides both high-level operations and
+                full access to internals.
+            \end{quote}
+        }
 
-\subsection{Installing Git}
-\begin{frame}[fragile]
-    \frametitle{Installing Git}
+    \subsection{Installing Git}
+        \frame {
+            \frametitle{Installing Git}
 
-    \begin{description}
-        \item[Debian] \verb/aptitude install git-core/
-        \item[OpenSUSE] \verb/zypper install git-core/
-        \item[Fedora] \verb/yum install git-core/
-        \item[Gentoo] \verb/emerge -va git-core/
-        \item[Codd] Already installed.
-        \item[DCS] Get source from \url{http://git.or.cz/}, then: \\ 
-            \verb# $ ./configure --prefix=$HOME# \\
-            \verb# $ make -j 30# \\
-            \verb# $ make install#
-        \item[MS-Windows] Don't care. YDIW, etc.
-    \end{description}
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\section{Doing stuff with Git}
-
-\begin{frame}[fragile]
-    What not to do at this point:
-
-    \begin{verbatim}
-        $ git-<TAB>
-        Display all 137 possibilities? (y or n)
-    \end{verbatim}
-
-    DON'T PANIC.
-
-    \begin{quote}
-    Git is a fast, scalable, distributed revision control system with an
-    unusually \alert{rich command set that provides both high-level operations and
-    full access to internals}.
-    \end{quote}
-
-\end{frame}
-
-\begin{frame}[fragile]
-    \frametitle{Creating a repository}
-
-    \begin{verbatim}
-$ git init
-Initialized empty Git repository in .git/
-    \end{verbatim}
-
-    \begin{verbatim}
-$ ls -la
-drwx------  3 lamby lamby 4096 2007-10-28 00:49 .
-drwxr-xr-x 74 lamby lamby 4096 2007-10-28 00:49 ..
-drwxr-xr-x  7 lamby lamby 4096 2007-10-28 00:49 .git
-    \end{verbatim}
-\end{frame}
-
-\begin{frame}[fragile]
-    \frametitle{Your first commit}
-
-    Committing is simple:
-
-    \begin{verbatim}
-$ vim hello.py
-$ git add hello.py
-$ git commit
-Created initial commit 0b7acf6: Intiial commit
- 1 files changed, 3 insertions(+), 0 deletions(-)
- create mode 100644 hello.py
-$
-    \end{verbatim}
-
-\end{frame}
-
-\begin{frame}[fragile]
-    \frametitle{What just happened?}
-
-    \begin{itemize}
-        \item Git has a \emph{staging area} for commits
-        \item \alert{git add} adds files to the staging area
-        \item \alert{git commit} commits the staging area
-        \item So faaast
-    \end{itemize}
-
-\begin{example}
-    To examine the difference between your , use \alert{git diff}.
-
-    \verb#git commit -a#
-\end{example}
-
-\end{frame}
+            \begin{description}
+                \item[Debian] \lstinline!aptitude install git-core!
+                \item[OpenSUSE] \lstinline!zypper install git-core!
+                \item[Fedora] \lstinline!yum install git-core!
+                \item[Gentoo] \lstinline!emerge -va git-core!
+                \item[Codd] Already installed.
+                \item[DCS] Get source from \url{http://git.or.cz/}, then: \\ 
+                    \lstinline! $ ./configure --prefix=$HOME! \\
+                    \lstinline! $ make -j 30! \\
+                    \lstinline! $ make install!
+                \item[MS-Windows] Don't care. YDIW, etc.
+            \end{description}
+        }
 
 
-\begin{frame}[fragile]
-    \frametitle{Viewing history}
+    \subsection{First commit}
+        \frame {
+            \frametitle{Our first commit}
 
-    \begin{itemize}
-        \item \alert{git log}
-    \end{itemize}
-\end{frame}
+            What not to do at this point: \\ \pause
 
+            \vskip 1em
+       
+            \lstinline!\$ git-<TAB>! \\
+            \lstinline!Display all 137 possibilities? (y or n)!
 
+            \vskip 1em
 
-\begin{frame}[fragile]
-    \frametitle{Branches}
+            Don't panic! \pause
 
-    \begin{itemize}
-        \item A single Git repository can maintain multiple branches
-        \item To create a new branch, run: \verb#git branch new-branch-name#
-        \item \verb#git branch# lists current branches:
+            \vskip 1em
 
-    \begin{verbatim}
-  ~/local/git/linux-linus2.6$ git branch
-    lamby-nek4k
-    liyu-nek4k
-  * master
-    nek4k\end{verbatim}
-        \item Switch branches with \verb#git checkout branch-name#
-    \end{itemize}
+            \begin{quote}
+                Git is a fast, scalable, distributed revision control system with an
+                unusually rich command set that \alert{provides both high-level operations and
+                full access to internal.}
+            \end{quote}
 
-\end{frame}
+        }
 
+        \frame {
+            \frametitle{Creating a repository}
+            \pause
+            \lstinputlisting{new_repository.txt}
+        }
 
+        \frame {
+            \frametitle{Your first commit}
+            Committing is simple:
+            \pause
+            \lstinputlisting{first_commit.txt}
+
+        }
+
+    \subsection{More detail}
+        \frame {
+            \frametitle{What just happened?}
+
+            \begin{itemize}
+                \item Git has a staging area for commits \pause
+                \item \lstinline!git add! adds files to the staging area
+                \item \lstinline!git commit! commits the staging area
+                \item \lstinline!git status! shows the status of the commit area
+            \end{itemize}
+        }
+
+    % TODO: Revert
+    % TODO: diff
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Sharing your work}
 
-\begin{frame}[fragile]
-    First, set your username.
+    \frame {
+        \frametitle{Sharing your work - overview}
 
-    \begin{verbatim}
-$ git config --global user.name "Chris Lamb"
-$ git config --global user.email chris@chris-lamb.co.uk
-    \end{verbatim}
-\end{frame}
+        \pause
 
-\begin{frame}[fragile]
-    No master servers - we another repository to 'push' to.
+        \begin{enumerate}
+            \item Create a new repository we can `push' to
+            \item Configure our local repo to point to it
+            \item Push our changes
+            \item Let people know how to clone this repo!
+            \item Merging changes from other repositories
+        \end{enumerate}
+    }
 
-    \begin{description}
-        \item[ssh] - Default
-        \item[git] - Custom protocol on \verb#9418/tcp#. Efficient. Firewall issues.
-        \item[http] - Slow, requires some extra configuration. Firewall friendly.
-        \item[rsync] - Fairly efficient.
-    \end{description}
+    \subsection{Creating a remote repository}
+    \frame {
+        \frametitle{Creating a remote repository}
 
-\end{frame}
+        \begin{itemize}
+            \item We need a remote repo to store our commits \pause
+            \item `Bare` repositories vs. normal repositories \pause
+        \end{itemize}
 
-\begin{frame}[fragile]
-    Sharing over HTTP.
-    
-    Create your bare Git repository in \verb#public_html#, or similar.
-    Or symlink your repositories \verb#.git# somewhere accessible
+        \begin{block}{Creating a bare repository}
+            \lstinline!\$ mkdir myproject.git! \\
+            \lstinline_\$ cd !\$_ \\
+            \lstinline!\$ git --bare init .!
+        \end{block}
+    }
 
-    You will need to run \verb#git-update-server-info# if you want 
+    \subsection{Configure local repository}
+    \frame {
+        \frametitle{Configure local repository}
 
-    Or make this automatic with:
+        \begin{itemize}
+            \item Each repo can 'track' other repositories, called \emph{remotes}
+            \item Remote specifications are stored in \lstinline!.git/config! \pause
+            \item Use \lstinline!git remote! to add a new remote:
+        \end{itemize}
 
-    \begin{verbatim}
-  $ chmod +x hooks/post-update
-    \end{verbatim}
-\end{frame}
+        \begin{block}{Tracking our remote repository}
+            \lstinline!\$ git remote add origin uwcs.co.uk:git/myproject.git!
+        \end{block}
+    }
 
-\begin{frame}[fragile]
-    \begin{verbatim}
-    \end{verbatim}
-\end{frame}
+
+    \subsection{Pushing changes}
+    \frame {
+        \frametitle{Pushing changes}
+
+        \begin{itemize}
+            \item Once you have made some commits, you can push changes! \pause
+            \item Use \lstinline!--all! the first time your push.
+        \end{itemize}
+
+        \begin{block}{Pushing changes (first time)}
+            \lstinline!\$ git push --all!
+        \end{block}
+
+        \begin{block}{Pushing changes}
+            \lstinline!\$ git push!
+        \end{block}
+    }
+
+    \subsection{Letting others clone your repository}
+    \frame {
+        \frametitle{Letting others clone your repository}
+
+        \begin{itemize}
+            \item You can create your bare Git repository in \lstinline!public_html! (or similar) \pause
+            \item \ldots or symlink a full repository's \lstinline!.git! into \lstinline!public_html! \pause
+            \item \ldots or use the Git protocol (recommended) \pause
+        \end{itemize}
+
+        \begin{block}{How others could clone your repository}
+            \lstinline!\$ git clone http://lamby.uwcs.co.uk/git/myproject.git!
+        \end{block}
+         \pause
+        \begin{alertblock}{Using the `dumb' protocols}
+            If you are pushing to a repository that will be served over HTTP you must execute: \\
+                \lstinline!    \$ chmod +x hooks/post-update!
+        \end{alertblock}
+    }
+
+    \subsection{Merging changes from others}
+    \frame {
+        \frametitle{Merging changes from others}
+        \pause
+        \begin{itemize}
+            \item Ask contributor to give you:
+                \begin{enumerate}
+                    \item His repository's URL (eg. \url{http://brad.uwcs.co.uk/git/myproject.git)} \pause
+                    \item Which branch of his to pull (eg. \lstinline!brads-new-cool-stuff!) \pause
+                \end{enumerate}
+        \end{itemize}
+
+        \begin{block}{Merging changes from others}
+            \lstinline!\$ git remote add brad http://brad.uwcs.co.uk/git/myproject.git! \\ \pause
+            \lstinline!\$ git branch brad-branch! \\
+            \lstinline!\$ git checkout brad-branch! \\ \pause
+            \lstinline!\$ git pull brad brads-new-cool-stuff! \\ \pause
+            \lstinline!\$ vim foo / git diff / ...! \\ \pause
+            \lstinline!\$ git checkout master! \\ \pause
+            \lstinline!\$ git merge brad-stuff!
+        \end{block}
+
+    }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Cool stuff}
 
 % Speed (wrt. workflow, garbage collecting)
-% CVS server emulation,
-% Cheap branching, cheap merging (octopus merge)
-% gitk
-% Importing SVN repositories
-% Interacting with SVN repositories
-% Importing from \$TOOL
-% Putting the current branch in your PROMPT!
+% gitweb
+
+    \subsection{Graphical tools}
+        \frame {
+            \frametitle{Gitk - `the Git repository browser'}
+            \includegraphics[width=75mm]{gitk.png}
+        }
+        \frame {
+            \frametitle{git-gui - `a portable graphical interface to Git'}
+            \includegraphics[width=75mm]{git-gui.png}
+        }
+
+    \subsection{Legacy tools}
+        \frame {
+            \frametitle{Importing from \$TOOL}
+
+            \begin{itemize}
+                \item Import complete history from:
+                    \begin{itemize}
+                        \item Subversion / SVK
+                        \item CVS
+                        \item Perforce
+                        \item Mercurial
+                        \item Darcs
+                        \item Arch, Quilt, IBM Rational ClearCase, \ldots
+                    \end{itemize}
+                \item Roll your own imports easily with \lstinline!git-fast-import!.
+                \item More info: 
+                    \small{\url{http://git.or.cz/gitwiki/InterfacesFrontendsAndTools}}
+            \end{itemize}
+        }
+
+        \frame {
+            \frametitle{Working transparently with SVN repositories}
+
+            \begin{itemize}
+                \item Get:
+                \begin{itemize}
+                    \item The familiar, faster and saner Git tools
+                    \item Off-line commits (whilst still being distributed)
+                    \item The warm glow of elitism
+                \end{itemize}
+                \item More info: \lstinline!man git-svn!
+            \end{itemize}
+        }
+
+    \subsection{Other stuff}
+        \frame {
+            \frametitle{Current branch in shell prompt}
+            
+            \begin{itemize}
+                \item Reduces repetitive typing of \lstinline!git branch!.
+            \end{itemize}
+
+            \includegraphics[width=110mm]{branch-prompt.png}
+        }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\frame
-{
+\frame {
     \frametitle{Thanks!}
     WUGLUG contact information:
     \begin{itemize}

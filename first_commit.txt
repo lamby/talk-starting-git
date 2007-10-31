@@ -1,0 +1,8 @@
+$ vim hello.py
+$ git add hello.py
+
+$ git commit
+Created initial commit 0b7acf6: Intiial commit
+1 files changed, 3 insertions(+), 0 deletions(-)
+create mode 100644 hello.py
+
